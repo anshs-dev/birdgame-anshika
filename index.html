@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Anshika's Blossom Flight ✨ Flappy Anshika</title>
+  <meta name="description" content="A magical 4K pink bougainvillea flight game specially customized for Anshika.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Sacramento&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Top Status / HUD -->
+    <div id="hud">
+      <div class="hud-left">
+        <div class="score-badge">
+          <span class="score-label">SCORE</span>
+          <span id="scoreDisplay">0</span>
+        </div>
+        <div class="best-badge">
+          <span class="best-label">BEST</span>
+          <span id="bestDisplay">0</span>
+        </div>
+      </div>
+      <div class="hud-right">
+        <button id="voiceToggleBtn" class="glass-btn icon-btn" title="Toggle Sassy Voice">
+          <span id="voiceIcon">🔊</span> Voice: ON
+        </button>
+        <button id="soundToggleBtn" class="glass-btn icon-btn" title="Toggle Sound FX">
+          <span id="soundIcon">🎵</span> Sound: ON
+        </button>
+        <button id="secretMsgBtn" class="glass-btn icon-btn heart-btn" title="Special Message">
+          💌 Love Note
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Speech Bubble (DOM overlay for ultra-crisp typography & expression badge) -->
+    <div id="speechBubble" class="speech-bubble hidden">
+      <div class="bubble-avatar-wrapper">
+        <img id="bubbleAvatar" src="assets/exp_angry.png" alt="Anshika">
+      </div>
+      <div class="bubble-content">
+        <span class="bubble-name">Anshika</span>
+        <p id="bubbleText">Shut the fuck up..!</p>
+      </div>
+    </div>
+
+    <!-- Start / Title Overlay Screen -->
+    <div id="startScreen" class="overlay-modal active">
+      <div class="modal-card glow-box">
+        <div class="portrait-container">
+          <img src="assets/portrait.png" alt="Anshika" class="hero-portrait">
+          <div class="pink-halo"></div>
+        </div>
+        <div class="modal-body">
+          <h2 class="sub-title">Bougainvillea Fantasy Edition</h2>
+          <h1 class="main-title">Anshika's <span class="gradient-text">Blossom Flight</span> 🌸</h1>
+          <p class="tagline">Tap, click, or press <kbd>SPACE</kbd> to flap & soar through the blooming bougainvillea vines.</p>
+          <div class="sassy-preview">
+            <span class="quote-tag">⚡ Queen Behavior:</span>
+            <em>"I am the best....!"</em>
+          </div>
+          <button id="startBtn" class="play-btn glow-pulse">
+            <span>START FLIGHT</span>
+            <div class="btn-sparkle">✨</div>
+          </button>
+          <div class="controls-hint">
+            <span>🖱️ Click / 📱 Tap / ⌨️ Spacebar to Jump</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="overlay-modal hidden">
+      <div class="modal-card game-over-card glow-box">
+        <div class="hurt-avatar-wrapper">
+          <img src="assets/player_hurt.png" alt="Anshika Hurt" class="hurt-img">
+          <div class="sparkle-orbit"></div>
+        </div>
+        <h2 class="game-over-title">Ouch! A Bougainvillea Caught You! 🌺</h2>
+        <p class="game-over-quote">"How dare you let me hit that branch...?!"</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-title">SCORE</span>
+            <span id="finalScore" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-title">BEST RECORD</span>
+            <span id="finalBest" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="romantic-preview-box">
+          <span class="heart-icon">💖</span>
+          <p class="infinity-quote">"I would try to describe your worth if I could, but the depth of infinity is still unknown to mankind...!"</p>
+        </div>
+
+        <div class="modal-actions">
+          <button id="restartBtn" class="play-btn">
+            <span>FLY AGAIN 🚀</span>
+          </button>
+          <button id="openLetterBtn" class="glass-btn read-letter-btn">
+            💌 Read Special Letter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dedicated Special Infinite Message Modal -->
+    <div id="loveModal" class="overlay-modal hidden">
+      <div class="modal-card letter-card glow-box">
+        <button id="closeLetterBtn" class="close-x">&times;</button>
+        <div class="letter-header">
+          <span class="cursive-tag">A Note For You</span>
+          <h2 class="letter-title">Dearest Anshika 💕</h2>
+        </div>
+        <div class="letter-body">
+          <div class="bougainvillea-crest">🌸 🌺 🌸</div>
+          <p class="letter-text emphasis">
+            “I would try to describe your worth if I could, but the depth of infinity is still unknown to mankind...!”
+          </p>
+          <p class="letter-subtext">
+            No score, no distance, and no number of blooming bougainvillea gardens could ever measure how radiant, unique, and truly priceless you are. Keep soaring high! ✨
+          </p>
+          <div class="signature">Always & Forever ♾️💖</div>
+        </div>
+        <button id="backToGameBtn" class="play-btn small-btn">
+          <span>Back to Game ✨</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
